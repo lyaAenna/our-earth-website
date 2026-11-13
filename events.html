@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events, Projects & Quizzes | Our Earth Day</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(rgba(27, 94, 32, 0.35), rgba(46, 125, 50, 0.35)), url('events.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2C3E50; 
+        }
+        header { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            background-color: #FFFFFF; 
+            border-bottom: 3px solid #81C784; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 25px; 
+            box-sizing: border-box; 
+            z-index: 1000; 
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1); 
+        }
+        .logo { font-size: 22px; font-weight: bold; letter-spacing: 2px; color: #2E7D32; text-decoration: none; }
+        nav { display: flex; gap: 6px; flex-wrap: wrap; }
+        nav a { color: #2E7D32; text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 20px; background-color: #E8F5E9; border: 1px solid #A5D6A7; transition: all 0.25s ease; }
+        nav a:hover, nav a.active { background-color: #2E7D32; color: #ffffff; border-color: #2E7D32; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25); }
+        .container { max-width: 900px; margin: 0 auto; padding: 120px 20px 60px 20px; }
+        h1, h2 { color: #1B5E20; text-transform: uppercase; letter-spacing: 1px; }
+        .card { 
+            background-color: rgba(255, 255, 255, 0.95); 
+            border: 2px solid #C8E6C9; 
+            border-radius: 16px; 
+            padding: 30px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+        }
+        .card h2 { border-bottom: 2px solid #A5D6A7; padding-bottom: 10px; margin-top: 0; }
+        ul, p { line-height: 1.8; color: #37474F; font-size: 15px; }
+        ul li { margin-bottom: 12px; }
+
+        /* Activists & Projects Layout Grid */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            background-color: #F1F8E9;
+            border: 1px solid #C8E6C9;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Square Images for Resource Library */
+        .resource-item {
+            text-align: center;
+            align-items: center;
+        }
+
+        .resource-item img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #C8E6C9;
+            margin: 0 auto 14px auto;
+            background-color: #FFFFFF;
+        }
+
+        .grid-item h3 {
+            color: #1B5E20;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+
+        .project-section-title {
+            font-style: italic;
+            color: #388E3C;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .resource-link {
+            color: #2E7D32;
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        .resource-link:hover { text-decoration: underline; }
+
+        /* Quiz Styles */
+        .quiz-question { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #E0E0E0; }
+        .quiz-question p { font-weight: bold; color: #1B5E20; }
+        .quiz-options label { display: block; background-color: #F1F8E9; padding: 10px 14px; margin: 8px 0; border-radius: 8px; cursor: pointer; border: 1px solid #C8E6C9; transition: all 0.2s ease; color: #2E7D32; font-weight: 500; }
+        .quiz-options label:hover { background-color: #DCEDC8; border-color: #2E7D32; }
+        .quiz-btn { background-color: #2E7D32; color: white; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 20px; cursor: pointer; transition: background 0.2s ease; margin-top: 10px; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2); }
+        .quiz-btn:hover { background-color: #1B5E20; }
+        #quiz-result { margin-top: 20px; font-size: 20px; font-weight: bold; color: #2E7D32; }
+        strong { color: #1B5E20; }
+
+        @media (max-width: 768px) { 
+            .container { padding: 110px 15px 40px 15px; } 
+            .card { padding: 20px; } 
+            .grid-2col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <a href="index.html" class="logo">OUR EARTH DAY</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="history.html">History & Issues</a>
+            <a href="practices.html">Practices & Goals</a>
+            <a href="events.html" class="active">Events & Activists</a>
+            <a href="diy.html">DIY Projects</a>
+            <a href="success.html">Success Stories</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Earth Day Events & Highlights</h2>
+            <ul>
+                <li><strong>International Cleanups & Demonstrations:</strong> Mobilizing communities to clear parks, public spaces, and shorelines of litter and waste.</li>
+                <li><strong>Tree Planting Initiatives:</strong> Local and international drives targeting deforested areas to restore carbon sinks.</li>
+                <li><strong>Community & School Programs:</strong> Educational workshops, student-led presentations, and environmental awareness rallies.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Spotlight on Activists & Organizations</h2>
+            <div class="grid-2col">
+                <div class="grid-item" style="align-items: center; text-align: center;">
+                    <img src="YHM.jpeg" alt="Yayasan Hijau Malaysia Logo" style="width: 100%; height: 110px; object-fit: contain; background-color: #FFFFFF; border-radius: 8px; border: 1px solid #C8E6C9; margin-bottom: 12px;">
+                    <h3>Yayasan Hijau Malaysia</h3>
+                    <p style="text-align: left;">A national foundation promoting green initiatives, environmental education, and sustainable lifestyles across communities.</p>
+                </div>
+                <div class="grid-item" style="align-items: center; text-align: center;">
+                    <img src="wwf.jpeg" alt="WWF Malaysia Logo" style="width: 100%; height: 110px; object-fit: contain; background-color: #FFFFFF; border-radius: 8px; border: 1px solid #C8E6C9; margin-bottom: 12px;">
+                    <h3>WWF Malaysia</h3>
+                    <p style="text-align: left;">Part of the global World Wide Fund for Nature network, working actively on wildlife protection, rainforest conservation, and marine preservation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Projects Card -->
+        <div class="card">
+            <h2>Student Projects</h2>
+            
+            <div class="project-section-title">*Initiatives by students at Sunway University*</div>
+            <div class="grid-2col" style="margin-bottom: 25px;">
+                <div class="grid-item">
+                    <h3>1. Increasing Energy Efficiency</h3>
+                    <p>The university relies on a mix of renewable and non-renewable energy, primarily sourced through the national grid via Tenaga Nasional Berhad (TNB), which utilizes both thermal and hydroelectric power. While the campus remains largely dependent on grid electricity, current sustainability efforts center on boosting energy efficiency by cutting down on waste and systematically upgrading to energy-efficient appliances.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>2. Rainwater Harvesting</h3>
+                    <p>Sourcing treated water indirectly adds to greenhouse gas emissions and places further strain on limited freshwater resources. To address this, a rainwater harvesting system was launched in 2017 to capture water for non-potable uses, including grounds cleaning and landscape irrigation. This initiative successfully saved 8.7 m³ of water in 2020 alone.</p>
+                </div>
+            </div>
+            <div class="grid-item" style="margin-bottom: 20px;">
+                <h3>3. Transportation and Commuting</h3>
+                <p>As the campus population grows each year, sustainable mobility remains a top priority. The university continues to invest in pedestrian-friendly walkways and facilities, reducing reliance on motor vehicles and creating a fully walkable campus environment.</p>
+            </div>
+
+            <div class="project-section-title" style="margin-top: 30px;">*Initiatives by students at Universiti Malaysia Sabah*</div>
+            <div class="grid-2col">
+                <div class="grid-item">
+                    <h3>1. EcoCampus Awareness Campaigns</h3>
+                    <p>Hosting targeted educational campaigns to build environmental awareness across campus and empower students and staff to adopt sustainable daily habits.</p>
+                </div>
+                <div class="grid-item">
+                    <h3>2. Community Engagement Programs</h3>
+                    <p>Expanding environmental initiatives into surrounding neighborhoods by collaborating with local communities through outreach campaigns and sustainability education.</p>
+                </div>
+            </div>
+            <div class="grid-item" style="margin-top: 20px;">
+                <h3>3. Recycling and Waste Management Initiatives</h3>
+                <p>Establishing comprehensive recycling initiatives and encouraging effective waste segregation to minimize the university's overall environmental footprint.</p>
+            </div>
+        </div>
+
+        <!-- Resource Library Card (Square Images) -->
+        <div class="card">
+            <h2>Resource Library</h2>
+            <div class="grid-2col">
+                <div class="grid-item resource-item">
+                    <img src="bill.jpeg" alt="Bill McKibben">
+                    <h3>(Bill McKibben)</h3>
+                    <a href="https://billmckibben.com/books/the-end-of-nature/" target="_blank" class="resource-link">https://billmckibben.com/books/the-end-of-nature/</a>
+                </div>
+                <div class="grid-item resource-item">
+                    <img src="rachel.jpeg" alt="Rachel Carson">
+                    <h3>(Rachel Carson)</h3>
+                    <a href="https://www.rachelcarson.org/silent-spring" target="_blank" class="resource-link">https://www.rachelcarson.org/silent-spring</a>
+                </div>
+            </div>
+            <div class="grid-2col" style="margin-top: 20px;">
+                <div class="grid-item resource-item">
+                    <img src="broken.jpeg" alt="United Nations">
+                    <h3>(United Nation, UN)</h3>
+                    <a href="https://news.un.org/en/story/2026/10/1168651" target="_blank" class="resource-link">https://news.un.org/en/story/2026/10/1168651</a>
+                </div>
+                <div class="grid-item resource-item">
+                    <img src="glasier.jpeg" alt="NASA">
+                    <h3>(NASA)</h3>
+                    <a href="https://science.nasa.gov/earth/earth-observatory/landslide-and-avalanche-debris-litter-hubbard-glacier/" target="_blank" class="resource-link">https://science.nasa.gov/earth/earth-observatory/landslide-and-avalanche-debris-litter-hubbard-glacier/</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Interactive Quizzes (10 Questions)</h2>
+            <p>Test your comprehensive knowledge based on the project slides!</p>
+            
+            <form id="eco-quiz">
+                <div class="quiz-question">
+                    <p>1. When was the first Earth Day founded?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="wrong"> April 22, 1980</label>
+                        <label><input type="radio" name="q1" value="correct"> April 22, 1970</label>
+                        <label><input type="radio" name="q1" value="wrong"> June 5, 1990</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>2. Who helped organize Earth Day internationally in 1990, mobilizing 200 million people?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="correct"> Denis Hayes</label>
+                        <label><input type="radio" name="q2" value="wrong"> Gaylord Nelson</label>
+                        <label><input type="radio" name="q2" value="wrong"> Al Gore</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>3. Which year marked the opening day for world leaders to officially sign the Paris Agreement on Climate Change?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="wrong"> 2010</label>
+                        <label><input type="radio" name="q3" value="correct"> 2018</label>
+                        <label><input type="radio" name="q3" value="wrong"> 2021</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>4. How many countries observe Earth Day annually today?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q4" value="wrong"> More than 50 countries</label>
+                        <label><input type="radio" name="q4" value="wrong"> More than 100 countries</label>
+                        <label><input type="radio" name="q4" value="correct"> More than 190 countries</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>5. According to sustainable practices, after how many minutes of leaving a room should you turn off lights?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q5" value="correct"> 15 minutes or more</label>
+                        <label><input type="radio" name="q5" value="wrong"> 30 minutes</label>
+                        <label><input type="radio" name="q5" value="wrong"> 1 hour</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>6. What national foundation in Malaysia is highlighted for promoting green initiatives?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q6" value="correct"> Yayasan Hijau Malaysia</label>
+                        <label><input type="radio" name="q6" value="wrong"> Malaysian GreenTech</label>
+                        <label><input type="radio" name="q6" value="wrong"> EcoMalaysia Foundation</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>7. In the Health In Harmony Borneo success story, what percentage drop was recorded in households participating in illegal logging?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q7" value="wrong"> 50% drop</label>
+                        <label><input type="radio" name="q7" value="wrong"> 75% drop</label>
+                        <label><input type="radio" name="q7" value="correct"> 90% drop</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>8. Which resort partnered with Coralku for coral reef restoration around Lang Tengah Island?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q8" value="correct"> Summer Bay Resort</label>
+                        <label><input type="radio" name="q8" value="wrong"> Redang Island Resort</label>
+                        <label><input type="radio" name="q8" value="wrong"> Tioman Beach Resort</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>9. How many coral species were documented to have naturally spawned in the restored coral garden?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q9" value="wrong"> 3 species</label>
+                        <label><input type="radio" name="q9" value="correct"> 8 different species</label>
+                        <label><input type="radio" name="q9" value="wrong"> 15 species</label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <p>10. What natural ingredient is mixed with citrus peels to create the DIY all-purpose cleaner?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q10" value="wrong"> Apple Cider Vinegar</label>
+                        <label><input type="radio" name="q10" value="correct"> Plain White Vinegar</label>
+                        <label><input type="radio" name="q10" value="wrong"> Lemon Juice</label>
+                    </div>
+                </div>
+
+                <button type="button" class="quiz-btn" onclick="checkQuiz()">Submit Quiz</button>
+                <div id="quiz-result"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function checkQuiz() {
+            let score = 0;
+            let total = 10;
+            for (let i = 1; i <= total; i++) {
+                let selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === "correct") {
+                    score++;
+                }
+            }
+            let resultDiv = document.getElementById("quiz-result");
+            resultDiv.innerHTML = `You scored ${score} out of ${total}! 🎉 Amazing job on the quiz!`;
+        }
+    </script>
+
+</body>
+</html>
